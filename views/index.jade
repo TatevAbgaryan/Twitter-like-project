@@ -1,0 +1,14 @@
+doctype html
+head.
+	<link rel="STYLESHEET" href="/stylesheets/style.css"/>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script type="text/javascript" src="https://www.google.com/recaptcha/api/challenge?k=6LfS8vgSAAAAAOboLZ24AmdfuzGKziWLesmvDvgI"></script>
+	<script src="/js/script.js"></script>
+body
+	div(id="result", style="display:none;")
+	form(id="PostForm")
+		textarea(name='PostMessage', id='PostMessage')
+		script(type='text/javascript', src='https://www.google.com/recaptcha/api/challenge?k=6LfS8vgSAAAAAOboLZ24AmdfuzGKziWLesmvDvgI')
+		div(id='recaptcha_widget_div', class='recaptcha_nothad_incorrect_sol recaptcha_isnot_showing_audio')
+		div(id='recaptcha_area')
+		input(type='submit', value='Submit')
