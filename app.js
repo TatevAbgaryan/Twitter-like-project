@@ -4,10 +4,10 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var simple_recaptcha = require('simple-recaptcha');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var hash = require('./routes/hash');
 
 var app = express();
 
@@ -24,6 +24,7 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/hash', hash);
 app.use('/users', users);
 
 /// catch 404 and forward to error handler

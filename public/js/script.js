@@ -15,7 +15,7 @@ $(function() {
 			type: 'POST',
 			dataType:'json',
 			contentType: "application/json",
-			jsonpCallback: 'callback', // this is not relevant to the POST anymore
+			jsonpCallback: 'callback',
 			success: function (data) {
 				$('#result').html(data);
 				$('#result').show('slow');
