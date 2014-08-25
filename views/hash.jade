@@ -4,4 +4,9 @@ head
 		| #{title}
 body
 	div(id="result")
-		| grmnda
+	script(src="/js/jquery.js")
+	script
+		| var posts = "#{posts}";
+		| posts = posts.replace(/&gt;/g, ">").replace(/&lt;/g, "<").replace(/&quot;/g, "\"");
+
+	script(src="/js/sendurl.js")

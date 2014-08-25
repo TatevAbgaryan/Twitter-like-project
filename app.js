@@ -61,8 +61,6 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-var host = "127.0.0.1",
-    port = 3000;
-app.listen(port, host, function(){
-    console.log("Listening " + host + ":" + port);
+app.listen(3000, function(){
+    console.log("Listening " + "localhost:3000");
 });

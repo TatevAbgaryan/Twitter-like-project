@@ -4,6 +4,7 @@ var simple_recaptcha= require('simple-recaptcha');
 var request			= require('request');
 var autoIncrement	= require('mongoose-auto-increment');
 var mongoose		= require('mongoose');
+var mime			= require('mime');
 var db				= mongoose.connection;
 var datetime		= new Date();
 
@@ -34,12 +35,12 @@ router.post('/submit', function(req, res){
 
 	var privateKey = '6LfS8vgSAAAAABZmF5jVCaSggRe_rbRjL-Aossol'; // your private key here
 	var ip = req.ip;
-	var challenge = req.body.recaptcha_challenge_field;
-	var response = req.body.recaptcha_response_field;
+	var challenge = req.body.challenge_field;
+	var response = req.body.response_field;
 
 	simple_recaptcha(privateKey, ip, challenge, response, function(err) {
 		if (err) {
-			return res.json(String(err))
+			return res.json(err)
 		} else {
 			var pieces = text.split(/[\s,-]+/);
 			var hashes = [];
@@ -72,15 +73,30 @@ router.post('/submit', function(req, res){
 				}
 			}
 
-			res.json(urls + " " + hashes);
+			res.json("Your post has been submitted");
 		};
 	});
 });
 router.get(/^\/s\/(\d+)$/, function (req, res, next) { // /s/123 tesqi cankacac request kanchum a es function@
-    var urlid = req.url.substr(3);
-    url.find({ '_id': urlid }, function (err, docs) {
+	var urlid = req.url.substr(3);
+	url.find({ '_id': urlid }, function (err, docs) {
 		var toredirect = docs[0].furl;
 		res.redirect(toredirect);
+	});
+});
+
+router.post('/geturl', function(req, res) {
+	var longurl = req.body.url.replace(/&amp;/g, "&"); // te che db-um url-i mej pahvum a & req-ov galis a &amp;
+	url.findOne({ 'furl': longurl }, function (err, docs) {
+		console.log("Auuuuuuuuuuuuuuu" + longurl);
+		if(docs.furl )
+			var type = mime.lookup(docs.furl);
+				if (type.search("image") == 0){
+					//console.log("yaaayyy")
+					res.json('<img src = "'  + docs.furl + '"/>')
+				}
+		var shorturl = "localhost:3000/s/" + docs._id;
+		res.json('<a href="http://' + shorturl + '">' + shorturl + '</a>');
 	});
 });
 

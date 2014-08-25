@@ -9,10 +9,12 @@ head.
 	<script src="/js/script.js"></script>
 body
 	div(id="result", style="display:none;")
+	script(type="text/javascript")
+		| var RecaptchaOptions = {
+		| 	theme : 'white'
+		| };
 	form(id="PostForm")
 		textarea(name='PostMessage', id='PostMessage', required='required', cols='36', rows='5')
-			| here is a, #nice video https://www.youtube.com/watch?v=gGyeuCEAyWU https://www.google.am/search?q=spring&oq=spring #happy #flowers
+			| here is a, #nice video https://www.youtube.com/watch?v=DYglX0H_OUo https://www.google.am/search?q=spring&oq=spring #happy #flowers 
 		script(type='text/javascript', src='https://www.google.com/recaptcha/api/challenge?k=6LfS8vgSAAAAAOboLZ24AmdfuzGKziWLesmvDvgI')
-		div(id='recaptcha_widget_div', class='recaptcha_nothad_incorrect_sol recaptcha_isnot_showing_audio')
-		div(id='recaptcha_area')
 		input(type='submit', value='Submit')
