@@ -15,7 +15,8 @@ for (var i = 0; i < pieces.length; i++) {
 				contentType: "application/json",
 				jsonpCallback: 'callback',
 				success: function (data) {
-					posts = posts.replace(rep, data);
+					posts = posts.replace(rep + " ", data);
+					console.log(posts)
 					$("#result").html(posts);
 				}
 			});
